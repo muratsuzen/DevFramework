@@ -58,7 +58,7 @@ namespace DevFramework.Core.DataAccess.NHibernate
         {
             using (var session = _hibernateHelper.OpenSession())
             {
-                session.Update(entity));
+                session.Update(entity);
                 return entity;
             }
         }
