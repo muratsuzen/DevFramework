@@ -1,0 +1,18 @@
+﻿@model DevFramework.Northwind.MvcWebUI.Models.ProductListViewModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>title</title>
+</head>
+<body>
+<div>
+      @foreach (var product in Model.Products)
+      {
+          @product.ProductName
+          <br/>
+      }
+</div>
+</body>
+</html>
