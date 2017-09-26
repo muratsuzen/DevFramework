@@ -21,7 +21,7 @@ namespace DevFramework.Core.CrossCuttingConcernes.Logging.Log4Net
         public bool IsDebugEnabled => _log.IsDebugEnabled;
         public bool IsWarnEnabled => _log.IsWarnEnabled;
         public bool IsFatalEnabled => _log.IsFatalEnabled;
-        public bool IsErrorEnabled => _log.IsErrorEnabled;
+        public bool IsErrorEnabled => _log.IsFatalEnabled;
 
         public void Info(object logMessage)
         {

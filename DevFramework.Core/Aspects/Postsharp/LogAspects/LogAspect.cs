@@ -58,7 +58,7 @@ namespace DevFramework.Core.Aspects.Postsharp.LogAspects
 
                 _loggerService.Info(logDetail);
             }
-            catch (Exception)
+            catch (Exception e)
             {
               
             }
