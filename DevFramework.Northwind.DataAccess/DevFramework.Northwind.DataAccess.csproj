@@ -58,10 +58,13 @@
   <ItemGroup>
     <Compile Include="Abstract\ICategoryDal.cs" />
     <Compile Include="Abstract\IProductDal.cs" />
+    <Compile Include="Abstract\IUserDal.cs" />
     <Compile Include="Concrete\Entityframework\EfCategoryDal.cs" />
     <Compile Include="Concrete\Entityframework\EfProductDal.cs" />
+    <Compile Include="Concrete\Entityframework\EfUserDal.cs" />
     <Compile Include="Concrete\Entityframework\Mappings\CategoryMap.cs" />
     <Compile Include="Concrete\Entityframework\Mappings\ProductMap.cs" />
+    <Compile Include="Concrete\Entityframework\Mappings\UserMap.cs" />
     <Compile Include="Concrete\Entityframework\NorthwindContext.cs" />
     <Compile Include="Concrete\NHibernate\Helpers\SqlServerHelper.cs" />
     <Compile Include="Concrete\NHibernate\Mappings\CategpryMap.cs" />
