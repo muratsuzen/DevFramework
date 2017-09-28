@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Transactions;
+using AutoMapper;
 using DevFramework.Core.CrossCuttingConcernes.Validation.FluentValidation;
 using DevFramework.Northwind.Business.Abstract;
 using DevFramework.Northwind.Business.ValidationRules.FluentValidation;
@@ -19,16 +20,19 @@ using DevFramework.Core.Aspects.Postsharp.ValidationAspects;
 using DevFramework.Core.CrossCuttingConcernes.Caching.Microsoft;
 using DevFramework.Core.CrossCuttingConcernes.Logging.Log4Net.Loggers;
 using DevFramework.Core.Aspects.Postsharp.AuthorizationAspects;
+using DevFramework.Core.Utilities.Mappings;
 
 namespace DevFramework.Northwind.Business.Concrete.Managers
 {
     public class ProductManager : IProductService
     {
         private IProductDal _productDal;
+        private readonly IMapper _mapper;
 
-        public ProductManager(IProductDal productDal)
+        public ProductManager(IProductDal productDal,IMapper mapper)
         {
             _productDal = productDal;
+            _mapper = mapper;
         }
 
         [CacheAspect(typeof(MemoryCacheManager))]
@@ -36,10 +40,10 @@ namespace DevFramework.Northwind.Business.Concrete.Managers
         [SecuredOperation(Roles="Admin,Editor,Student")]
         public List<Product> GetAll()
         {
-            Thread.Sleep(3000);
-            return _productDal.GetList();
+            var products = _mapper.Map<List<Product>>(_productDal.GetList());
+            return products;
         }
-
+         
         public Product GetById(int id)
         {
             return _productDal.Get(p => p.ProductId == id);
