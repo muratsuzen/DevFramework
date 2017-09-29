@@ -7,6 +7,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+using DevFramework.Northwind.Business.Abstract;
+using DevFramework.Northwind.Business.DependencyResolvers.Ninject;
+using DevFramework.Northwind.Entities.Concrete;
 
 namespace DevFramework.Northwind.WebApi.MessageHandlers
 {
@@ -23,10 +26,12 @@ namespace DevFramework.Northwind.WebApi.MessageHandlers
                     string decodedString = Encoding.UTF8.GetString(data);
                     string[] tokenValues = decodedString.Split(':');
 
-                    if (tokenValues[0] == "murat" && tokenValues[1] == "1234")
+                    IUserService userService = InstanceFactory.GetInstance<IUserService>();
+                    User user = userService.GetByUserNameAndPassword(tokenValues[0], tokenValues[1]);
+                    if (user!=null)
                     {
                         IPrincipal principal =
-                            new GenericPrincipal(new GenericIdentity(tokenValues[0]), new[] {"Admin"});
+                            new GenericPrincipal(new GenericIdentity(tokenValues[0]), userService.GetUserRoles(user).Select(u=>u.RoleName).ToArray());
                         Thread.CurrentPrincipal = principal;
                         HttpContext.Current.User = principal;
                     }
